@@ -1,0 +1,39 @@
+name: Neon contribution graph
+
+on:
+  schedule:
+    - cron: "23 2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/contribution-fx.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contribution-fx
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Render neon graphs
+        uses: Sur1ive/contribution-fx@0c7303e3949901701337755cacef30ba2674130b # v1.3.1
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/contribution-fx.svg?theme=neon&palette=ocean&mode=light&label=true
+            dist/contribution-fx-dark.svg?theme=neon&palette=ocean&mode=dark&label=true
+
+      - name: Publish generated images
+        uses: crazy-max/ghaction-github-pages@1d6ee9b181a81033a16bd707a1401afa978daab4 # v5
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Refresh neon contribution graph"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
