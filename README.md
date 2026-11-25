@@ -31,4 +31,3 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
 
 **Currently exploring:** backend architecture · home labs & infrastructure · AI developer tooling
 
-*The more I understand, the more I realise there is to explore.*
