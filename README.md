@@ -1,10 +1,12 @@
 ![Shayman McGee — curious by nature, creative by instinct, analytical by choice.](assets/banner.svg)
 
 <p align="center">
-  <strong>Self-taught developer · Creative thinker · Melbourne, Australia</strong><br/>
-  <a href="https://flow-form.com.au">FlowForm demo</a> ·
-  <a href="https://github.com/Shayman-M-86?tab=repositories">Repositories</a> ·
-  <a href="mailto:shaymanmcgee1@hotmail.com">Get in touch</a>
+  <strong>Self-taught developer · Creative thinker · Melbourne, Australia</strong><br/><br/>
+  <a href="https://flow-form.com.au"><img src="https://flow-form.com.au/FlowForm_logo.png" width="22" height="22" align="absmiddle" alt=""/> FlowForm demo</a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/Shayman-M-86?tab=repositories"><img src="assets/repositories.svg" width="22" height="22" align="absmiddle" alt=""/> Repositories</a>
+  &nbsp; · &nbsp;
+  <a href="https://www.linkedin.com/in/shayman-mcgee-b224a2140/"><img src="assets/linkedin.svg" width="22" height="22" align="absmiddle" alt=""/> LinkedIn</a>
 </p>
 
 I like taking things apart, understanding the connections and building something useful. My background spans photography, business ownership, team management and logistics. Software brings those experiences together through creative problem-solving and a fascination with how systems work.
