@@ -37,9 +37,9 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
 ### 💡 Current FlowForm ideas
 
 <p align="center">
-  <img src="assets/ideas/idea-671421237e2b5471.webp" width="250" alt="AI-assisted engineering quality toolchain: Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards."/>
-  <img src="assets/ideas/idea-dd391c10c805b16e.webp" width="250" alt="Stateless submission encryption and verifiable answer integrity: Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification."/>
-  <img src="assets/ideas/idea-980908bbceaebcbf.webp" width="250" alt="Auth0 user provisioning and internal ID claims: Automatically create FlowForm users when they first log in and include their internal user ID in future access tokens so the backend no longer needs to look it up on every request."/>
+  <img src="assets/ideas/idea-3738c084aac191ae.webp" width="250" alt="AI-assisted engineering quality toolchain: Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards."/>
+  <img src="assets/ideas/idea-d66f65b0488a99d9.webp" width="250" alt="Stateless submission encryption and verifiable answer integrity: Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification."/>
+  <img src="assets/ideas/idea-2b207a5f20a620c2.webp" width="250" alt="Auth0 user provisioning and internal ID claims: Automatically create FlowForm users when they first log in and include their internal user ID in future access tokens so the backend no longer needs to look it up on every request."/>
 </p>
 <!-- FLOWFORM_IDEAS:END -->
 
