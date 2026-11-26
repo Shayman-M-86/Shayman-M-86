@@ -33,6 +33,19 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
 
 **Currently exploring:** backend architecture · home labs & infrastructure · AI developer tooling
 
+<!-- FLOWFORM_IDEAS:START -->
+<details>
+<summary><strong>💡 Current FlowForm ideas</strong></summary>
+
+<p><strong>AI-assisted engineering quality toolchain</strong><br/>Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards.</p>
+
+<p><strong>Stateless submission encryption and verifiable answer integrity</strong><br/>Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification.</p>
+
+<p><strong>Auth0 user provisioning and internal ID claims</strong><br/>Automatically create FlowForm users when they first log in and include their internal user ID in future access tokens so the backend no longer needs to look it up on every request.</p>
+
+</details>
+<!-- FLOWFORM_IDEAS:END -->
+
 ---
 
 <a href="https://github.com/Sur1ive/contribution-fx" title="Animated contribution graph powered by contribution-fx">
