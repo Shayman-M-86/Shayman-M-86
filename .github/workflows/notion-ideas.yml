@@ -1,0 +1,54 @@
+name: Sync FlowForm ideas from Notion
+
+on:
+  schedule:
+    - cron: "41 3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_notion_ideas.py
+      - scripts/test_sync_notion_ideas.py
+      - .github/workflows/notion-ideas.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notion-ideas
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out current profile
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+
+      - name: Check sync behaviour
+        run: python3 -m unittest discover -s scripts -p 'test_sync_notion_ideas.py' -v
+
+      - name: Refresh titles and summaries
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          if [ -z "$NOTION_TOKEN" ]; then
+            echo "::notice::Notion sync is waiting for the NOTION_TOKEN repository secret. README was left unchanged."
+            exit 0
+          fi
+          python3 scripts/sync_notion_ideas.py
+
+      - name: Commit only changed ideas
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "No ideas changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Refresh FlowForm ideas from Notion"
+          git push origin HEAD:main
