@@ -77,6 +77,26 @@ class SyncTests(unittest.TestCase):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 sync.replace_region(text, "")
 
+    def test_full_sync_updates_readme_and_preserves_generated_images(self):
+        with tempfile.TemporaryDirectory() as directory:
+            old_cwd = Path.cwd()
+            try:
+                os.chdir(directory)
+                Path("README.md").write_text(
+                    f"before\n{sync.START}\nold\n{sync.END}\nafter", encoding="utf-8")
+                with patch.dict(os.environ, {"NOTION_TOKEN": "test-only-token"}):
+                    with patch.object(sync, "fetch_ideas", return_value=[idea(str(i)) for i in range(3)]):
+                        sync.main()
+                        first = Path("README.md").read_text(encoding="utf-8")
+                        sync.main()
+                self.assertEqual(first, Path("README.md").read_text(encoding="utf-8"))
+                self.assertEqual(first.count("<img "), 3)
+                self.assertEqual(len(list(Path("assets/ideas").glob("idea-*.webp"))), 3)
+                self.assertTrue(first.startswith("before\n"))
+                self.assertTrue(first.endswith("\nafter"))
+            finally:
+                os.chdir(old_cwd)
+
     def test_query_requests_newest_three_without_page_bodies(self):
         response = unittest.mock.MagicMock()
         response.__enter__.return_value.read.return_value = json.dumps({"results": []}).encode()
