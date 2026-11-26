@@ -51,5 +51,3 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
     <img src="https://raw.githubusercontent.com/Shayman-M-86/Shayman-M-86/output/contribution-fx.svg" alt="Shayman's GitHub contributions, animated with a neon glow" width="100%"/>
   </picture>
 </a>
-
-*The more I understand, the more I realise there is to explore.*
