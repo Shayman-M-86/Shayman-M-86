@@ -2,7 +2,7 @@
 
 The profile displays the three newest cards from the FlowForm Ideas data source, ordered by Notion's page creation time. Editing an older card updates its text if it is still among the newest three; it does not make that card newer.
 
-The gallery publishes each card's **cover image**, **Title** and **Summary** as a rounded image card. Page bodies, chat links, related-page links, category, dates and Notion URLs are not exported. Future cards enter this public feed automatically. Published content also becomes part of the public Git commit history.
+The gallery publishes each card's **cover image**, **Title** and **Summary** as a rounded image card. Page bodies, chat links, related-page links, category and dates are not exported. Each card links to its source Notion page; visitors need permission to view private pages. Future cards enter this public feed automatically. Published content also becomes part of the public Git commit history.
 
 ## One-time connection
 

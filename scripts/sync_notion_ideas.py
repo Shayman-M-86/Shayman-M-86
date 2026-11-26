@@ -7,6 +7,7 @@ import sys
 import time
 import shutil
 import tempfile
+from uuid import UUID
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from render_idea_cards import render_cards
@@ -77,7 +78,10 @@ def public_ideas(rows):
         summary = plain_text(props.get("Summary", {}), "rich_text").strip()
         if not title:
             continue
-        ideas.append({"title": title, "summary": summary, "row": row})
+        ideas.append({
+            "title": title, "summary": summary, "row": row,
+            "url": "https://www.notion.so/" + UUID(row["id"]).hex,
+        })
     return ideas
 
 
@@ -90,8 +94,8 @@ def render_ideas(rows, image_paths=None):
     if len(image_paths) != len(ideas):
         raise ValueError("Expected one card image for every idea.")
     images = [
-        f'  <img src="assets/ideas/{path.name}" width="250" '
-        f'alt="{safe_text(idea["title"] + ": " + idea["summary"])}"/>'
+        f'  <a href="{idea["url"]}" title="Open idea in Notion"><img src="assets/ideas/{path.name}" width="250" '
+        f'alt="{safe_text(idea["title"] + ": " + idea["summary"])}"/></a>'
         for idea, path in zip(ideas, image_paths)
     ]
     return (

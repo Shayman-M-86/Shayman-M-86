@@ -13,6 +13,7 @@ from PIL import Image
 
 def idea(title="An idea", summary="A summary", **extra):
     return {
+        "id": "4221cb8e-6238-8109-8953-f69846bbfe42",
         "properties": {
             "Title": {"type": "title", "title": [{"plain_text": title}]},
             "Summary": {"type": "rich_text", "rich_text": [{"plain_text": summary}]},
@@ -34,6 +35,17 @@ class SyncTests(unittest.TestCase):
         self.assertIn("&lt;img", result)
         self.assertNotIn("<img src=x>", result)
         self.assertNotIn(sync.END, result)
+
+    def test_cards_link_to_their_own_notion_pages(self):
+        result = sync.render_ideas([
+            idea(id="4221cb8e-6238-8109-8953-f69846bbfe42"),
+            idea(id="4221cb8e-6238-81ff-9c85-f5fa8841b016"),
+        ])
+        self.assertIn('href="https://www.notion.so/4221cb8e623881098953f69846bbfe42"', result)
+        self.assertIn('href="https://www.notion.so/4221cb8e623881ff9c85f5fa8841b016"', result)
+        self.assertEqual(result.count("</a>"), 2)
+        with self.assertRaises(ValueError):
+            sync.render_ideas([idea(id='javascript:alert(1)')])
 
     def test_real_cards_have_equal_heights_and_stable_file_names(self):
         with tempfile.TemporaryDirectory() as directory:
