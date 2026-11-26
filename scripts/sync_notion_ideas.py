@@ -115,8 +115,8 @@ def main():
     token = os.environ.get("NOTION_TOKEN", "").strip()
     if not token:
         raise RuntimeError("Add the NOTION_TOKEN repository secret to enable the Notion sync.")
-    path = Path("README.md")
-    original = path.read_text(encoding="utf-8")
+    readme_path = Path("README.md")
+    original = readme_path.read_text(encoding="utf-8")
     # All network, parsing and rendering must succeed before writing anything.
     rows = fetch_ideas(token)
     # Validate the README before producing or replacing any public files.
@@ -136,7 +136,7 @@ def main():
             if stale.name not in keep:
                 stale.unlink()
     if updated != original:
-        path.write_text(updated, encoding="utf-8")
+        readme_path.write_text(updated, encoding="utf-8")
         print("Updated the FlowForm ideas section.")
     else:
         print("FlowForm ideas have not changed.")
