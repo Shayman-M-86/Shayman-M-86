@@ -7,6 +7,8 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 
 import sync_notion_ideas as sync
+from render_idea_cards import render_cards, wrap, font
+from PIL import Image
 
 
 def idea(title="An idea", summary="A summary", **extra):
@@ -23,15 +25,34 @@ def idea(title="An idea", summary="A summary", **extra):
 class SyncTests(unittest.TestCase):
     def test_only_three_titles_and_summaries_are_published(self):
         result = sync.render_ideas([idea(str(i)) for i in range(4)])
-        self.assertEqual(result.count("<p>"), 3)
+        self.assertEqual(result.count("<img "), 3)
         self.assertNotIn("never-export", result)
-        self.assertNotIn("<strong>3</strong>", result)
+        self.assertNotIn('alt="3:', result)
 
     def test_note_html_and_region_markers_are_escaped(self):
         result = sync.render_ideas([idea("</strong><img src=x>", sync.END)])
         self.assertIn("&lt;img", result)
-        self.assertNotIn("<img", result)
+        self.assertNotIn("<img src=x>", result)
         self.assertNotIn(sync.END, result)
+
+    def test_real_cards_have_equal_heights_and_stable_file_names(self):
+        with tempfile.TemporaryDirectory() as directory:
+            rows = [idea("Short", "Brief"), idea("A longer title " * 5, "Long summary " * 12)]
+            first = render_cards(sync.public_ideas(rows), directory)
+            second = render_cards(sync.public_ideas(rows), directory)
+            self.assertEqual(first, second)
+            sizes = []
+            for path in first:
+                with Image.open(path) as image:
+                    sizes.append(image.size)
+                    self.assertEqual(image.getpixel((0, 0))[3], 0)
+            self.assertEqual(sizes[0], sizes[1])
+
+    def test_long_words_wrap_without_overflow(self):
+        face = font(28)
+        lines = wrap("x" * 200, face, 580)
+        self.assertGreater(len(lines), 1)
+        self.assertTrue(all(face.getlength(line) <= 580 for line in lines))
 
     def test_empty_and_archived_results_hide_the_section(self):
         self.assertEqual(sync.render_ideas([]), "")

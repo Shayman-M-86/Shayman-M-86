@@ -1,12 +1,15 @@
-"""Publish only the three newest Notion idea titles and summaries to README.md."""
+"""Publish the newest three idea covers, titles and summaries as gallery cards."""
 import html
 import json
 import os
 from pathlib import Path
 import sys
 import time
+import shutil
+import tempfile
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from render_idea_cards import render_cards
 
 START = "<!-- FLOWFORM_IDEAS:START -->"
 END = "<!-- FLOWFORM_IDEAS:END -->"
@@ -64,8 +67,8 @@ def safe_text(value):
     return html.escape(value, quote=True)
 
 
-def render_ideas(rows):
-    paragraphs = []
+def public_ideas(rows):
+    ideas = []
     for row in rows[:3]:
         if row.get("archived") or row.get("in_trash"):
             continue
@@ -74,18 +77,27 @@ def render_ideas(rows):
         summary = plain_text(props.get("Summary", {}), "rich_text").strip()
         if not title:
             continue
-        title = safe_text(title)
-        summary = safe_text(summary)
-        paragraphs.append(
-            f"<p><strong>{title}</strong>" +
-            (f"<br/>{summary}" if summary else "") + "</p>"
-        )
-    if not paragraphs:
+        ideas.append({"title": title, "summary": summary, "row": row})
+    return ideas
+
+
+def render_ideas(rows, image_paths=None):
+    ideas = public_ideas(rows)
+    if not ideas:
         return ""
+    if image_paths is None:
+        image_paths = [Path(f"idea-{i}.webp") for i in range(len(ideas))]
+    if len(image_paths) != len(ideas):
+        raise ValueError("Expected one card image for every idea.")
+    images = [
+        f'  <img src="assets/ideas/{path.name}" width="250" '
+        f'alt="{safe_text(idea["title"] + ": " + idea["summary"])}"/>'
+        for idea, path in zip(ideas, image_paths)
+    ]
     return (
-        '<details>\n<summary><strong>💡 Current FlowForm ideas</strong></summary>\n\n'
-        + "\n\n".join(paragraphs)
-        + "\n\n</details>\n"
+        '### 💡 Current FlowForm ideas\n\n<p align="center">\n'
+        + "\n".join(images)
+        + "\n</p>\n"
     )
 
 
@@ -106,8 +118,23 @@ def main():
     path = Path("README.md")
     original = path.read_text(encoding="utf-8")
     # All network, parsing and rendering must succeed before writing anything.
-    content = render_ideas(fetch_ideas(token))
-    updated = replace_region(original, content)
+    rows = fetch_ideas(token)
+    # Validate the README before producing or replacing any public files.
+    replace_region(original, "")
+    with tempfile.TemporaryDirectory() as directory:
+        paths = render_cards(public_ideas(rows), directory)
+        content = render_ideas(rows, paths)
+        updated = replace_region(original, content)
+        assets = Path("assets/ideas")
+        assets.mkdir(parents=True, exist_ok=True)
+        keep = {path.name for path in paths}
+        for path in paths:
+            target = assets / path.name
+            if not target.exists():
+                shutil.copyfile(path, target)
+        for stale in assets.glob("idea-*.webp"):
+            if stale.name not in keep:
+                stale.unlink()
     if updated != original:
         path.write_text(updated, encoding="utf-8")
         print("Updated the FlowForm ideas section.")

@@ -34,16 +34,13 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
 **Currently exploring:** backend architecture · home labs & infrastructure · AI developer tooling
 
 <!-- FLOWFORM_IDEAS:START -->
-<details>
-<summary><strong>💡 Current FlowForm ideas</strong></summary>
+### 💡 Current FlowForm ideas
 
-<p><strong>AI-assisted engineering quality toolchain</strong><br/>Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards.</p>
-
-<p><strong>Stateless submission encryption and verifiable answer integrity</strong><br/>Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification.</p>
-
-<p><strong>Auth0 user provisioning and internal ID claims</strong><br/>Automatically create FlowForm users when they first log in and include their internal user ID in future access tokens so the backend no longer needs to look it up on every request.</p>
-
-</details>
+<p align="center">
+  <img src="assets/ideas/idea-671421237e2b5471.webp" width="250" alt="AI-assisted engineering quality toolchain: Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards."/>
+  <img src="assets/ideas/idea-dd391c10c805b16e.webp" width="250" alt="Stateless submission encryption and verifiable answer integrity: Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification."/>
+  <img src="assets/ideas/idea-980908bbceaebcbf.webp" width="250" alt="Auth0 user provisioning and internal ID claims: Automatically create FlowForm users when they first log in and include their internal user ID in future access tokens so the backend no longer needs to look it up on every request."/>
+</p>
 <!-- FLOWFORM_IDEAS:END -->
 
 ---
@@ -54,3 +51,5 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
     <img src="https://raw.githubusercontent.com/Shayman-M-86/Shayman-M-86/output/contribution-fx.svg" alt="Shayman's GitHub contributions, animated with a neon glow" width="100%"/>
   </picture>
 </a>
+
+*The more I understand, the more I realise there is to explore.*
