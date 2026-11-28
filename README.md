@@ -37,9 +37,9 @@ Running **In Shot Media** taught me to connect creative decisions with real requ
 ### 💡 Current FlowForm ideas
 
 <p align="center">
-  <a href="https://www.notion.so/4241cb8e623881f1ac7afdc288a6e8f4" title="Open idea in Notion"><img src="assets/ideas/idea-456096aa726ea4f7.webp" width="250" alt="Proxmox network isolation and controlled egress: Isolate self-hosted FlowForm from the home network using dedicated Proxmox bridges, UniFi firewall zones, Cloudflare Tunnel and Squid egress controls."/></a>
-  <a href="https://www.notion.so/4221cb8e623881098953f69846bbfe42" title="Open idea in Notion"><img src="assets/ideas/idea-3738c084aac191ae.webp" width="250" alt="AI-assisted engineering quality toolchain: Guide coding agents before implementation and measure unnecessary complexity, redundant work and runtime inefficiency afterwards."/></a>
-  <a href="https://www.notion.so/4221cb8e623881ff9c85f5fa8841b016" title="Open idea in Notion"><img src="assets/ideas/idea-d66f65b0488a99d9.webp" width="250" alt="Stateless submission encryption and verifiable answer integrity: Use per-submission asymmetric encryption and client-carried encrypted session tokens for fast answer writes, with optional signatures for independent integrity verification."/></a>
+  <a href="https://www.notion.so/4251cb8e6238814db1dbcf831e3f3039" title="Open idea in Notion"><img src="assets/ideas/idea-bd7a6e194ee50022.webp" width="250" alt="Survey-scoped asymmetric key hierarchies and cryptographic privilege separation: Separate survey encryption, historical linkage and submission-level key material to enable restricted recovery and horizontally scalable writes."/></a>
+  <a href="https://www.notion.so/4251cb8e623881f5aa60d80fb3a397e7" title="Open idea in Notion"><img src="assets/ideas/idea-d5d8403911ccf868.webp" width="250" alt="Asymmetric session linkage and deterministic answer addressing: Use survey-level asymmetric linkage and key wrapping with encrypted session capabilities and deterministic answer addresses to simplify frequent writes while preserving efficient bulk recovery."/></a>
+  <a href="https://www.notion.so/4241cb8e623881f1ac7afdc288a6e8f4" title="Open idea in Notion"><img src="assets/ideas/idea-1433fd13c9a5c9fa.webp" width="250" alt="Proxmox network isolation and controlled egress: Isolate self-hosted FlowForm from the home network using dedicated Proxmox bridges, UniFi firewall zones, Cloudflare Tunnel and Squid egress controls."/></a>
 </p>
 <!-- FLOWFORM_IDEAS:END -->
 
